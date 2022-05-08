@@ -547,12 +547,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "85
 [; ;lab10-p2_main-20168.c: 85:     RCSTAbits.SPEN = 1;
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-"87
-[; ;lab10-p2_main-20168.c: 87:     TXSTAbits.TXEN = 1;
+"86
+[; ;lab10-p2_main-20168.c: 86:     TXSTAbits.TXEN = 1;
 [e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-"88
-[; ;lab10-p2_main-20168.c: 88:     RCSTAbits.CREN = 1;
+"87
+[; ;lab10-p2_main-20168.c: 87:     RCSTAbits.CREN = 1;
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+"88
+[; ;lab10-p2_main-20168.c: 88:     PIE1bits.RCIE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
 "89
 [; ;lab10-p2_main-20168.c: 89: }
 [e :UE 139 ]
@@ -624,73 +627,73 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ != -> *U _string `ui -> 0 `ui 146  ]
 [e :U 147 ]
 "106
-[; ;lab10-p2_main-20168.c: 106:     enter(1);
-[e ( _enter (1 -> 1 `i ]
-"107
-[; ;lab10-p2_main-20168.c: 107: }
+[; ;lab10-p2_main-20168.c: 106: }
 [e :UE 144 ]
 }
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"110
-[; ;lab10-p2_main-20168.c: 110: void __attribute__((picinterrupt(("")))) isr(void){
+"109
+[; ;lab10-p2_main-20168.c: 109: void __attribute__((picinterrupt(("")))) isr(void){
 [v _isr `(v ~T1 @X0 1 ef ]
 {
 [e :U _isr ]
 [f ]
-"111
-[; ;lab10-p2_main-20168.c: 111:     if (PIR1bits.ADIF){
+"110
+[; ;lab10-p2_main-20168.c: 110:     if (PIR1bits.ADIF){
 [e $ ! != -> . . _PIR1bits 0 6 `i -> 0 `i 152  ]
 {
-"112
-[; ;lab10-p2_main-20168.c: 112:         if (ADCON0bits.CHS == 0){
+"111
+[; ;lab10-p2_main-20168.c: 111:         if (ADCON0bits.CHS == 0){
 [e $ ! == -> . . _ADCON0bits 0 2 `i -> 0 `i 153  ]
 {
-"113
-[; ;lab10-p2_main-20168.c: 113:            pot1 = ADRESH;
+"112
+[; ;lab10-p2_main-20168.c: 112:            pot1 = ADRESH;
 [e = _pot1 _ADRESH ]
-"114
-[; ;lab10-p2_main-20168.c: 114:         }
+"113
+[; ;lab10-p2_main-20168.c: 113:         }
 }
 [e :U 153 ]
-"115
-[; ;lab10-p2_main-20168.c: 115:         PIR1bits.ADIF = 0;
+"114
+[; ;lab10-p2_main-20168.c: 114:         PIR1bits.ADIF = 0;
 [e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-"116
-[; ;lab10-p2_main-20168.c: 116:     }
+"115
+[; ;lab10-p2_main-20168.c: 115:     }
 }
 [e :U 152 ]
-"118
-[; ;lab10-p2_main-20168.c: 118:     if (RCIF){
+"117
+[; ;lab10-p2_main-20168.c: 117:     if (RCIF){
 [e $ ! _RCIF 154  ]
 {
-"119
-[; ;lab10-p2_main-20168.c: 119:         if (state_flag == 0){
+"118
+[; ;lab10-p2_main-20168.c: 118:         if (state_flag == 0){
 [e $ ! == _state_flag -> 0 `i 155  ]
 {
-"120
-[; ;lab10-p2_main-20168.c: 120:             opt_sel = RCREG;
+"119
+[; ;lab10-p2_main-20168.c: 119:             opt_sel = RCREG;
 [e = _opt_sel _RCREG ]
-"121
-[; ;lab10-p2_main-20168.c: 121:             RCREG = 0;
+"120
+[; ;lab10-p2_main-20168.c: 120:             RCREG = 0;
 [e = _RCREG -> -> 0 `i `uc ]
-"122
-[; ;lab10-p2_main-20168.c: 122:         }
+"121
+[; ;lab10-p2_main-20168.c: 121:         }
 }
 [e $U 156  ]
-"123
-[; ;lab10-p2_main-20168.c: 123:         else if (state_flag == 1){
+"122
+[; ;lab10-p2_main-20168.c: 122:         else if (state_flag == 1){
 [e :U 155 ]
 [e $ ! == _state_flag -> 1 `i 157  ]
 {
-"124
-[; ;lab10-p2_main-20168.c: 124:             state_flag = 0;
+"123
+[; ;lab10-p2_main-20168.c: 123:             state_flag = 0;
 [e = _state_flag -> 0 `i ]
-"125
-[; ;lab10-p2_main-20168.c: 125:             portb_char = RCREG;
+"124
+[; ;lab10-p2_main-20168.c: 124:             portb_char = RCREG;
 [e = _portb_char _RCREG ]
-"126
-[; ;lab10-p2_main-20168.c: 126:             TXREG = portb_char;
+"125
+[; ;lab10-p2_main-20168.c: 125:             TXREG = portb_char;
 [e = _TXREG _portb_char ]
+"126
+[; ;lab10-p2_main-20168.c: 126:             PORTB = portb_char;
+[e = _PORTB _portb_char ]
 "127
 [; ;lab10-p2_main-20168.c: 127:             RCREG = 0;
 [e = _RCREG -> -> 0 `i `uc ]
@@ -815,16 +818,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lab10-p2_main-20168.c: 165:     tprint("----------------Main Menu-------------------");
 [e ( _tprint (1 :s 3C ]
 "166
-[; ;lab10-p2_main-20168.c: 166:     tprint("a) Lectura del potenciometro.");
-[e ( _tprint (1 :s 4C ]
+[; ;lab10-p2_main-20168.c: 166:     enter(1);
+[e ( _enter (1 -> 1 `i ]
 "167
-[; ;lab10-p2_main-20168.c: 167:     tprint("b) Enviar ASCII.");
-[e ( _tprint (1 :s 5C ]
+[; ;lab10-p2_main-20168.c: 167:     tprint("a) Lectura del potenciometro.");
+[e ( _tprint (1 :s 4C ]
 "168
-[; ;lab10-p2_main-20168.c: 168:     enter(2);
-[e ( _enter (1 -> 2 `i ]
+[; ;lab10-p2_main-20168.c: 168:     enter(1);
+[e ( _enter (1 -> 1 `i ]
 "169
-[; ;lab10-p2_main-20168.c: 169: }
+[; ;lab10-p2_main-20168.c: 169:     tprint("b) Enviar ASCII.");
+[e ( _tprint (1 :s 5C ]
+"170
+[; ;lab10-p2_main-20168.c: 170:     enter(2);
+[e ( _enter (1 -> 2 `i ]
+"171
+[; ;lab10-p2_main-20168.c: 171: }
 [e :UE 166 ]
 }
 [a 4C 97 41 32 76 101 99 116 117 114 97 32 100 101 108 32 112 111 116 101 110 99 105 111 109 101 116 114 111 46 0 ]

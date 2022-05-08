@@ -2801,9 +2801,9 @@ void setup(void){
     SPBRGH = 0;
     SPBRG = 25;
     RCSTAbits.SPEN = 1;
-
     TXSTAbits.TXEN = 1;
     RCSTAbits.CREN = 1;
+    PIE1bits.RCIE = 1;
 }
 
 void enter(int a){
@@ -2821,7 +2821,6 @@ void tprint(char *string){
         TXREG = *string;
         *string++;
     }
-    enter(1);
 }
 
 
@@ -2842,6 +2841,7 @@ void __attribute__((picinterrupt(("")))) isr(void){
             state_flag = 0;
             portb_char = RCREG;
             TXREG = portb_char;
+            PORTB = portb_char;
             RCREG = 0;
             enter(1);
             item_list();
@@ -2881,7 +2881,9 @@ void main(void) {
 void item_list(){
     enter(2);
     tprint("----------------Main Menu-------------------");
+    enter(1);
     tprint("a) Lectura del potenciometro.");
+    enter(1);
     tprint("b) Enviar ASCII.");
     enter(2);
 }
